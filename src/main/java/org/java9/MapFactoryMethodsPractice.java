@@ -1,10 +1,9 @@
-package org.java9tojava17;
+package org.java9;
 
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class MapFactoryMethodsPractice {
 

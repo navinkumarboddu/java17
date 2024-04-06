@@ -1,6 +1,5 @@
-package org.java9tojava17;
+package org.java9;
 
-import org.java9tojava17.SetFactoryMethodsPractice;
 import org.junit.jupiter.api.Test;
 
 import java.util.Set;

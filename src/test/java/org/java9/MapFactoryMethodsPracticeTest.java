@@ -1,11 +1,9 @@
-package org.java9tojava17;
+package org.java9;
 
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
