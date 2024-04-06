@@ -12,6 +12,14 @@ class SetFactoryMethodsPracticeTest {
     @Test
     void testGetStockSymbols(){
         assertThrows(UnsupportedOperationException.class, () -> {
+            Set<String> stocks = SetFactoryMethodsPractice.getStockSymbols();
+            stocks.add("NVDA");
+        });
+    }
+
+    @Test
+    void testStockSymbolsUsingFactoryMethods(){
+        assertThrows(UnsupportedOperationException.class, () -> {
             Set<String> stocks = SetFactoryMethodsPractice.getStockSymbolsUsingFactoryMethods();
             stocks.add("NVDA");
         });
