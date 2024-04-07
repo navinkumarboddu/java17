@@ -7,33 +7,6 @@ import java.util.stream.Collectors;
 
 public class RestaurantCollector {
 
-    public static List<Restaurant> getRestaurants(){
-        List<Restaurant> restaurants = new ArrayList<>();
-
-        Restaurant restaurant1 = new Restaurant("Kesar Da Dhaba");
-        restaurant1.setCuisine(Cuisine.INDIAN);
-        List<Item> items1 = List.of(new Item("Dosa",200),
-                new Item("Misal", 250));
-        restaurant1.setItems(items1);
-        restaurants.add(restaurant1);
-
-        Restaurant restaurant2 = new Restaurant("Finix");
-        restaurant2.setCuisine(Cuisine.BAKERY);
-        List<Item> items2 = List.of(new Item("Cake", 250),
-                new Item("Khaari", 50));
-        restaurant2.setItems(items2);
-        restaurants.add(restaurant2);
-
-        Restaurant restaurant3 = new Restaurant("Desi Dhaba");
-        restaurant3.setCuisine(Cuisine.INDIAN);
-        List<Item> items3 = List.of(new Item("Ghee Roti",20),
-                new Item("Paneer Sabji", 250));
-        restaurant3.setItems(items3);
-        restaurants.add(restaurant3);
-
-        return restaurants;
-    }
-
     /*
     * It uses Collectors.mapping to map each Restaurant to its list of items and collects them into a list.
     * As a result, it produces a Map<Cuisine, List<List<Item>>> where each cuisine maps to a list of lists of items.
@@ -101,9 +74,45 @@ public class RestaurantCollector {
         }
     }
 
+    /**
+     * It first filters the restaurants based on the rating condition (rest.getRating() >= 4.5).
+     * After filtering, it collects the filtered restaurants into a Map with the cuisine as the key and a list of corresponding restaurants as the value.
+     */
+    public static void beforeDownStreamFiltering(List<Restaurant> restaurants) {
+        Map<Cuisine, List<Restaurant>> byRatingFiltering = restaurants.stream()
+                .filter(rest -> rest.getRating() >= 4.5)
+                .collect(Collectors.groupingBy(Restaurant::getCuisine));
+
+        byRatingFiltering.forEach( (key, value) -> System.out.println(key + "->" + value + "\n"));
+    }
+
+    /**
+     * This method utilizes the Collectors.filtering() downstream collector introduced in Java 9.
+     * It directly collects the restaurants into a Map using groupingBy with two parameters: the classification function (Restaurant::getCuisine) and the downstream collector (Collectors.filtering()).
+     * The Collectors.filtering() collector allows us to specify an additional filtering condition (restaurant -> restaurant.getRating() >= 4.5) to be applied after grouping by cuisine.
+     * This approach combines both filtering and grouping into a single collector operation, potentially making the code more concise and expressive.
+     * */
+    public static void afterDownStreamFiltering(List<Restaurant> restaurants) {
+        Map<Cuisine, List<Restaurant>> byRatingFiltering = restaurants.stream()
+                //.filter(rest -> rest.getRating() >= 4.5)
+                .collect(Collectors.groupingBy(
+                        Restaurant::getCuisine,
+                        Collectors.filtering(
+                        restaurant -> restaurant.getRating() >= 4.5,
+                        Collectors.toList())
+                ));
+
+        byRatingFiltering.forEach( (key, value) -> System.out.println(key + "->" + value + "\n"));
+    }
+
     public static void main(String[] args) {
-        List<Restaurant> restaurants = RestaurantCollector.getRestaurants();
+        List<Restaurant> restaurants = RestaurantUtil.createRestaurants();
         beforeDownStreamFlatMapping(restaurants);
         afterDownStreamFlatMapping(restaurants);
+
+        System.out.println("Filtering Example beforeDownStreamFiltering: Filter restaurants with greater than 4.5 \n");
+        beforeDownStreamFiltering(restaurants);
+        System.out.println("Filtering Example afterDownStreamFiltering: Filter restaurants with greater than 4.5 \n");
+        afterDownStreamFiltering(restaurants);
     }
 }
