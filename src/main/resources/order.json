@@ -1,0 +1,14 @@
+{
+  "customerIp": "192.168.1.100",
+  "description": "Sample order description",
+  "currency": "USD",
+  "amount": 150.99,
+  "products": ["Product1", "Product2", "Product3"],
+  "buyer": {
+    "email": "buyer@example.com",
+    "firstname": "John",
+    "lastname": "Doe",
+    "phone": "1234567890"
+
+  }
+}
