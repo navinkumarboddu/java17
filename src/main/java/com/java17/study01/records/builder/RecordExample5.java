@@ -1,4 +1,4 @@
-package com.java17.study01.builder;
+package com.java17.study01.records.builder;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

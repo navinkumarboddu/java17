@@ -1,6 +1,6 @@
-package com.java17.study01.types;
+package com.java17.study01.records.types;
 
-import static com.java17.study01.Validation.checkThat;
+import static com.java17.study01.records.Validation.checkThat;
 
 public record FullName(String firstName, String familyName) {
 

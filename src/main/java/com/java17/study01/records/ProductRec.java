@@ -1,6 +1,4 @@
-package com.java17.study01;
-
-import static com.java17.study01.Validation.checkThat;
+package com.java17.study01.records;
 
 public record ProductRec(long id, String name, String description) {
 
@@ -25,7 +23,7 @@ public record ProductRec(long id, String name, String description) {
     }
 
     public ProductRec{
-        checkThat(name != null && !name.isBlank(), "name must not be null or blank");
+        Validation.checkThat(name != null && !name.isBlank(), "name must not be null or blank");
     }
 
     public ProductRec(long id, String name){

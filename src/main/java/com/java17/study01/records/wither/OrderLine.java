@@ -1,6 +1,6 @@
-package com.java17.study01.wither;
+package com.java17.study01.records.wither;
 
-import com.java17.study01.ProductRec;
+import com.java17.study01.records.ProductRec;
 
 import java.math.BigDecimal;
 

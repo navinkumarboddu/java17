@@ -1,4 +1,4 @@
-package com.java17.study01;
+package com.java17.study01.records;
 
 public class RecordExample2 {
 
